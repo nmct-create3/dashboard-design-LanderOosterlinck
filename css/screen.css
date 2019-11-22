@@ -1,26 +1,39 @@
 /*------------------------------------*\
 #FONTS
 \*------------------------------------*/
-
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&display=swap');
 /*------------------------------------*\
 #Variables
 \*------------------------------------*/
 
 :root {
     /* colors */
-    --color-alpha-light: MEDIUMSLATEBLUE;
-    --color-alpha: SLATEBLUE;
+    --color-alpha-10-light: #F0F0F7;
+    --color-alpha-light: #A5A4BF;
+    --color-alpha: #A3A0FB;
+    --color-alpha-dark: #43425D;
 
-    --color-neutral-light: LIGHTSLATEGRAY;
-    --color-neutral: SLATEGRAY;
-    --color-neutral-dark: DARKSLATEGRAY;
+    --color-neutral-light: white;
+    --color-neutral: ;
+    --color-neutral-dark: #4D4F5C;
+    --color-neutral-10-dark: #3B3B53; 
+
+    --background-color: white;
 
     /* Shadows */
+    --shadow-neutral: 0 2px 6px rgba(0, 0, 0, 0.04);
 
     /* border radius */
 
     /* transitions */
     --transition-alpha: .1s;
+
+    /* whitespace */
+    --baseline: 5px;
+
+    --layout-sidebar-width: 260px;
+    --layout-header-height: 70px;
+    
 }
 
 /*------------------------------------*\
@@ -34,14 +47,14 @@
 */
 
 html {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.5;
     font-family: Helvetica, arial, sans-serif;
     color: var(--color-neutral-dark);
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: white;
+    background-color: var(--color-alpha-10-light);
 }
 
 *,
@@ -67,6 +80,19 @@ html {
     background: var(--color-alpha);
     color: white;
     text-shadow: none;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+    background: #dedede;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-alpha);
 }
 
 /*------------------------------------*\
@@ -294,6 +320,105 @@ input::placeholder {
     ---
     Website main logo
 */
+.c-logo {
+    margin: 0;
+
+    text-transform: uppercase;
+    color: var(--color-neutral-light);
+    
+    line-height: calc(var(--baseline) * 4);
+    font-size: 1rem; /* 1rem = 1 font-size van de body */
+}
+
+.c-app {
+}
+
+.c-app__logo {
+    display: flex;
+    align-items: center;
+    padding: calc(var(--baseline) * 5) calc(var(--baseline) * 4);
+    background: var(--color-neutral-10-dark);
+}
+
+.c-app__sidebar {
+    background: var(--color-neutral-dark);
+    box-shadow: var(--shadow-neutral);
+    display: none;
+}
+
+.c-app__topbar {
+    background: var(--color-neutral-light);
+    box-shadow: var(--shadow-neutral);
+    display: none;
+}
+
+@media screen and (min-width: 960px) {
+    .c-app {
+        display: grid;
+        grid-template-columns: var(--layout-sidebar-width) 1fr;
+        grid-template-rows: var(--layout-header-height) 1fr;
+    }
+
+    .c-app__logo {
+        padding: 0 calc(var(--baseline) * 4);
+    }
+
+    .c-app__sidebar,
+    .c-app__main {
+        height: calc(100vh - var(--layout-header-height));
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .c-app__sidebar,
+    .c-app__topbar {
+        display: block;
+    }
+}
+
+.c-icon {
+    height: 1rem;
+    width: 1rem;
+    fill: var(--local-color-alpha-light);
+}
+
+.c-main-nav__list {
+    margin: 0;
+    padding: 0;
+}
+
+.c-main-nav__item {
+    display: flex;
+    align-items: center;
+    color: var(--color-alpha-10-light);
+    padding: calc(var(--baseline) * 3) calc(var(--baseline) * 4);
+    transition: all ease-in-out 0.1s;
+
+    --local-color-alpha-light: var(--color-alpha-light)
+}
+
+.c-main-nav__link {
+    margin-left: calc(var(--baseline) * 2);
+    color: var(--color-neutral-light);
+    font-size: 1rem;
+    line-height: calc(var(--baseline) * 5);
+    text-decoration: none;
+}
+
+.c-main-nav__link:visited {
+    color: var(--color-neutral-light);
+}
+
+.is-selected,
+.c-main-nav__item:hover {
+    border-left: var(--baseline) solid var(--color-alpha);
+    background-color: var(--color-neutral-10-dark);
+    --local-color-alpha-light: var(--color-alpha);
+}
+/* 
+.is-selected .c-icon {
+    fill: var(--color-alpha);
+} */
 
 /*------------------------------------*\
 #UTILITIES
